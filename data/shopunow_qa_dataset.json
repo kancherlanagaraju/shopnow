@@ -174,8 +174,8 @@
         "audience": "External"
     },
     {
-        "question": "What payment methods does ShopUNow accept for my subscription?",
-        "answer": "ShopUNow accepts major credit cards (Visa, MasterCard, American Express), debit cards, PayPal, and Apple Pay. For corporate accounts, we also support ACH transfers and wire payments. You can add or change your payment method in the \"Billing Settings\" page.",
+        "question": "How do I update my ShopUNow payment method?",
+        "answer": "Log in to your ShopUNow account and open the \"Billing Settings\" page. Select the option to add or change your payment method, choose an accepted method, and follow the prompts to save it. ShopUNow accepts major credit cards (Visa, MasterCard, American Express), debit cards, PayPal, and Apple Pay. Corporate accounts can also use ACH transfers and wire payments.",
         "department": "Billing & Payments",
         "audience": "External"
     },

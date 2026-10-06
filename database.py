@@ -1,5 +1,6 @@
 import os
 import json
+import hashlib
 import uuid
 import chromadb
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -20,14 +21,30 @@ def initialize_database():
     with open(DATASET_PATH, "r") as f:
         qa_data = json.load(f)
 
+    dataset_hash = hashlib.sha256(
+        json.dumps(qa_data, sort_keys=True, ensure_ascii=False).encode("utf-8")
+    ).hexdigest()
+
     client = get_chroma_client()
     # We use a single collection for simplicity, using metadata filtering to isolate departments
     collection = client.get_or_create_collection(name="shopunow_faqs")
     
-    # Check if already populated to avoid duplicates
+    # Skip only when the index was built from this exact dataset version.
     if collection.count() > 0:
-        print(f"Database already populated with {collection.count()} documents. Skipping initialization.")
-        return
+        if (collection.metadata or {}).get("dataset_sha256") == dataset_hash:
+            print(f"Database already synchronized with {collection.count()} documents. Skipping initialization.")
+            return
+
+        print("Knowledge base dataset changed; rebuilding the ChromaDB collection.")
+        client.delete_collection(name="shopunow_faqs")
+        collection = client.create_collection(
+            name="shopunow_faqs",
+            metadata={"dataset_sha256": dataset_hash},
+        )
+    else:
+        collection.modify(
+            metadata={**(collection.metadata or {}), "dataset_sha256": dataset_hash}
+        )
 
     embeddings_model = get_embeddings_model()
     
