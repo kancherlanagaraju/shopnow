@@ -7,6 +7,13 @@ from pydantic import BaseModel, Field
 from config import GROQ_API_KEY, ROUTER_MODEL, RAG_MODEL, ENABLE_REFLECTION
 from retrieval import retrieve_context
 
+VALID_DEPARTMENTS = {
+    "HR",
+    "IT Support",
+    "Billing & Payments",
+    "Shipping & Delivery",
+}
+
 class GraphState(TypedDict):
     query: str
     sentiment: str
@@ -47,10 +54,18 @@ If it doesn't clearly match one of these, output 'Unknown'.
     }
 
 def human_escalation(state: GraphState) -> GraphState:
-    """Provides a human escalation response."""
+    """Provides a human escalation response for urgent or unresolved support issues."""
     return {
         "response": "Your query has been escalated to a human support agent. They will reach out to you shortly."
     }
+
+
+def out_of_scope_response(state: GraphState) -> GraphState:
+    """Handles queries that are unrelated to ShopUNow support operations."""
+    return {
+        "response": "This request is outside the ShopUNow support scope. I can only help with HR, IT, billing, and shipping questions."
+    }
+
 
 def rag_generation(state: GraphState) -> GraphState:
     """Retrieves context and generates a grounded response."""
@@ -119,14 +134,19 @@ ORIGINAL ANSWER:
     }
 
 def route_query(state: GraphState) -> str:
-    """Routes the query based on categorization."""
+    """Routes the query based on categorization.
+
+    Negative sentiment indicates a support escalation.
+    Known ShopUNow support departments go to RAG.
+    Unrecognized or out-of-scope questions get a clear out-of-scope response instead of a human escalation.
+    """
     if state["sentiment"].lower() == "negative":
         return "escalate"
-    
-    if state["department"] == "Unknown":
-        return "escalate"
-        
-    return "rag"
+
+    if state["department"] in VALID_DEPARTMENTS:
+        return "rag"
+
+    return "out_of_scope"
 
 def should_reflect(state: GraphState) -> str:
     """Determines whether to route to reflection or end."""
@@ -140,6 +160,7 @@ workflow = StateGraph(GraphState)
 # Add Nodes
 workflow.add_node("categorizer", categorize_query)
 workflow.add_node("escalation", human_escalation)
+workflow.add_node("out_of_scope", out_of_scope_response)
 workflow.add_node("rag", rag_generation)
 workflow.add_node("reflection", reflection_node)
 
@@ -151,11 +172,13 @@ workflow.add_conditional_edges(
     route_query,
     {
         "escalate": "escalation",
-        "rag": "rag"
+        "rag": "rag",
+        "out_of_scope": "out_of_scope",
     }
 )
 
 workflow.add_edge("escalation", END)
+workflow.add_edge("out_of_scope", END)
 
 workflow.add_conditional_edges(
     "rag",
