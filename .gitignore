@@ -14,7 +14,8 @@ chroma_db/
 *.sqlite3
 
 # Project specific
-data/
+data/chroma_db/
+# data/shopunow_qa_dataset.json is INCLUDED (source of truth for knowledge base)
 
 # Local development
 .venv311/

@@ -6,6 +6,18 @@
         "audience": "Internal"
     },
     {
+        "question": "How do I apply for sick leave at ShopUNow?",
+        "answer": "Sick leave requests follow the same process as vacation days. Log into the ShopUNow HR portal, navigate to the Leave Request section, select your date(s), and choose \"Sick Leave\" as the leave type. Submit the request and your manager will review it. ShopUNow employees receive 10 paid sick days per calendar year. In case of an emergency, you can notify your manager directly and submit the leave request within 24 hours. All sick leave requests require documentation if the absence exceeds 3 consecutive days.",
+        "department": "HR",
+        "audience": "Internal"
+    },
+    {
+        "question": "What about PTO or personal time off at ShopUNow?",
+        "answer": "Personal Time Off (PTO) is handled through the same leave request portal as vacation and sick leave. Log into the HR portal, go to Leave Request, select your dates, and choose \"Personal Time Off\" as the leave type. Submit for manager approval. The amount of PTO available varies by role and tenure: part-time employees receive 3 days/year, full-time employees receive 5 days/year, and employees with 5+ years of service receive 7 days/year. PTO can be used for any reason and does not require documentation.",
+        "department": "HR",
+        "audience": "Internal"
+    },
+    {
         "question": "How does ShopUNow handle health insurance for full\u2011time employees?",
         "answer": "Full\u2011time employees are automatically enrolled in ShopUNow\u2019s Group Health Plan, which includes medical, dental, and vision coverage. The plan is funded 70% by the company and 30% by the employee through payroll deductions. You can view your plan details and claim status in the HR portal under Benefits. For any questions about coverage limits or provider networks, contact the benefits team at benefits@shopunow.com.",
         "department": "HR",
@@ -72,6 +84,12 @@
         "audience": "Internal"
     },
     {
+        "question": "What is the maternity and paternity leave policy at ShopUNow?",
+        "answer": "ShopUNow offers 12 weeks of paid maternity leave and 8 weeks of paid paternity leave for full-time employees. To apply, log into the HR portal and navigate to Special Leave > Maternity/Paternity. Submit your leave request at least 4 weeks before the expected due date. You'll need to provide a medical certification or adoption papers. During leave, your health insurance benefits continue uninterrupted. After your return, you may be eligible for flexible work arrangements or part-time schedules. For questions, contact the Benefits team at benefits@shopunow.com.",
+        "department": "HR",
+        "audience": "Internal"
+    },
+    {
         "question": "How do I reset my ShopUNow employee VPN password?",
         "answer": "To reset your VPN password, log in to the ShopUNow Employee Portal and navigate to \"Account Settings\" > \"Security\". Click \"Reset VPN Password\" and follow the on-screen instructions. You will receive a temporary password via the corporate email you used to register. Use this temporary password to log in, then set a new password that meets the company policy (minimum 12 characters, at least one uppercase, one lowercase, one number, and one special character).",
         "department": "IT Support",
@@ -104,6 +122,12 @@
     {
         "question": "What is the procedure for requesting a new software license for a design tool?",
         "answer": "Submit a Software License Request Form via the IT Service Desk portal. Include the software name, version, number of seats, and justification. Once approved by the IT Manager, the license will be added to your account and you\u2019ll receive an email with activation instructions. If you need a trial, request a temporary license and IT will provide a 30\u2011day trial key.",
+        "department": "IT Support",
+        "audience": "Internal"
+    },
+    {
+        "question": "How do I request a new monitor or additional hardware for my workstation?",
+        "answer": "Hardware requests (monitors, keyboards, mice, docking stations, etc.) are submitted through the IT Service Desk portal under \"Hardware Requests\". Select the device type, quantity, and include a business justification. Standard requests are approved within 1\u20113 business days. Once approved, IT will arrange delivery and setup. For urgent requests or large orders affecting multiple employees, contact your department manager and they can escalate the request through IT leadership. Note: Hardware must meet company standards and budget constraints.",
         "department": "IT Support",
         "audience": "Internal"
     },
